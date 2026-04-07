@@ -20,7 +20,10 @@ enum Permissions {
     }
 
     static func requestAccessibility() {
-        let opts = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true] as CFDictionary
+        // On modern SDKs `kAXTrustedCheckOptionPrompt` is already a CFString,
+        // so we bridge it straight to String rather than going through
+        // `Unmanaged.takeUnretainedValue()`.
+        let opts = [kAXTrustedCheckOptionPrompt as String: true] as CFDictionary
         _ = AXIsProcessTrustedWithOptions(opts)
     }
 }

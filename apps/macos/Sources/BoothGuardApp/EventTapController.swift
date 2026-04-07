@@ -1,6 +1,6 @@
 import AppKit
 import CoreGraphics
-import os.log
+import os
 
 /// Owns the session-level CGEvent tap that intercepts and (when locked)
 /// suppresses keyboard, trackpad, and mouse input. Keystrokes that arrive

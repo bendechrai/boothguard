@@ -1,6 +1,6 @@
 import AppKit
 import BoothGuardCore
-import os.log
+import os
 
 /// Top-level coordinator. Owns the menu bar item, the lock state machine,
 /// the event tap, and the lock overlay, wires their callbacks together, and

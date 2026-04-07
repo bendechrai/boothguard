@@ -1,5 +1,6 @@
 import Foundation
 import CryptoKit
+import Security
 
 /// Hashes and verifies PINs using a salted, iterated SHA-256 construction.
 ///
