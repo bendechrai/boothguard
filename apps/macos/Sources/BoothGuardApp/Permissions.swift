@@ -20,10 +20,11 @@ enum Permissions {
     }
 
     static func requestAccessibility() {
-        // On modern SDKs `kAXTrustedCheckOptionPrompt` is already a CFString,
-        // so we bridge it straight to String rather than going through
-        // `Unmanaged.takeUnretainedValue()`.
-        let opts = [kAXTrustedCheckOptionPrompt as String: true] as CFDictionary
+        // `kAXTrustedCheckOptionPrompt` is imported as `Unmanaged<CFString>`
+        // by the macOS 14 SDK, so we have to unwrap it before bridging to
+        // String for the options dictionary key.
+        let key = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String
+        let opts = [key: true] as CFDictionary
         _ = AXIsProcessTrustedWithOptions(opts)
     }
 }

@@ -114,7 +114,7 @@ final class EventTapController {
         // dropped wholesale.
         if type == .keyDown {
             let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
-            if let character = Self.character(forKeyCode: Int(keyCode)) {
+            if let character = EventTapController.character(forKeyCode: Int(keyCode)) {
                 DispatchQueue.main.async {
                     if character == "\r" {
                         controller.submitHandler?()
