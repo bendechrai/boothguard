@@ -5,21 +5,21 @@ final class PINValidationTests: XCTestCase {
 
     func testAcceptsValidPINs() {
         for pin in ["1234", "12345", "123456", "1234567", "12345678"] {
-            XCTAssertEqual(PINValidation.validate(pin), .success(()))
+            XCTAssertNil(PINValidation.validate(pin), "expected \(pin) to validate")
         }
     }
 
     func testRejectsTooShort() {
-        XCTAssertEqual(PINValidation.validate("123"), .failure(.tooShort))
-        XCTAssertEqual(PINValidation.validate(""), .failure(.tooShort))
+        XCTAssertEqual(PINValidation.validate("123"), .tooShort)
+        XCTAssertEqual(PINValidation.validate(""), .tooShort)
     }
 
     func testRejectsTooLong() {
-        XCTAssertEqual(PINValidation.validate("123456789"), .failure(.tooLong))
+        XCTAssertEqual(PINValidation.validate("123456789"), .tooLong)
     }
 
     func testRejectsNonDigits() {
-        XCTAssertEqual(PINValidation.validate("12a4"), .failure(.nonDigit))
-        XCTAssertEqual(PINValidation.validate("    "), .failure(.nonDigit))
+        XCTAssertEqual(PINValidation.validate("12a4"), .nonDigit)
+        XCTAssertEqual(PINValidation.validate("    "), .nonDigit)
     }
 }

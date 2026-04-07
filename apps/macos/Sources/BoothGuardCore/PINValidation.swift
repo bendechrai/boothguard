@@ -11,10 +11,12 @@ public enum PINValidation {
         case nonDigit
     }
 
-    public static func validate(_ pin: String) -> Result<Void, Error> {
-        if pin.count < minLength { return .failure(.tooShort) }
-        if pin.count > maxLength { return .failure(.tooLong) }
-        if !pin.allSatisfy({ $0.isASCII && $0.isNumber }) { return .failure(.nonDigit) }
-        return .success(())
+    /// Returns `nil` if `pin` is a valid BoothGuard PIN, or the specific
+    /// reason it isn't.
+    public static func validate(_ pin: String) -> Error? {
+        if pin.count < minLength { return .tooShort }
+        if pin.count > maxLength { return .tooLong }
+        if !pin.allSatisfy({ $0.isASCII && $0.isNumber }) { return .nonDigit }
+        return nil
     }
 }

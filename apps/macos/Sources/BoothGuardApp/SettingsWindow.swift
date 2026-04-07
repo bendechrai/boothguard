@@ -89,12 +89,9 @@ final class SettingsModel: ObservableObject {
 
     func savePIN() {
         pinError = nil
-        switch PINValidation.validate(newPIN) {
-        case .failure(let err):
+        if let err = PINValidation.validate(newPIN) {
             pinError = message(for: err)
             return
-        case .success:
-            break
         }
         if newPIN != confirmPIN {
             pinError = "PINs do not match."
